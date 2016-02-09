@@ -16,27 +16,7 @@
     <div id="fdmHeaderContainer" class="row col-xs-12">
         <div id="fdmHeaderBar">
             <h1><img id="fdm-logo" src="client/assets/images/fdm-logo.jpg" height="42" width="84">
-<<<<<<< HEAD
             FDM Timesheet</h1>
-        </div>
-   </div>
-<div id="userEntry" class="row col-xs-12 col-xs-offset-1">
-   <p>Week: <input ng-model="week"></p>
-   <p>Date: <input ng-repeat="dateField in dateTable.dateFields track by $index" type='text' ng-model='dateTable.dateFields[$index]' placeholder='Date'><button ng-click="addFormDateField()">Add</button>
-   <p>Hours: <input ng-repeat="hourField in hourTable.hourFields track by $index" type='text' ng-model='hourTable.hourFields[$index]' placeholder='Hours Worked'><button ng-click="addFormHourField()">Add</button>
-   <p>Break: <input ng-repeat="breakField in breakTable.breakFields track by $index" type='text' ng-model='breakTable.breakFields[$index]' placeholder='Breaks Taken'><button ng-click="addFormBreakField()">Add</button>
-</div>
-      
-<div id ="userDisplay" class="row col-xs-12 col-xs-offset-1">
-    <p>Week Number: {{week}}</p>
-    <li ng-repeat="dates in dateTable">Date: {{dates.dateField}}</li>
-    <li ng-repeat="hours in hourTable">Hours: {{hours.hourField}}</li>
-   <li ng-repeat="breaks in breakTable">Breaks: {{breaks.breakField}}</li>
-    <pre>{{ hourTable | json }}</pre>
-    <pre>{{ breakTable | json }}</pre>
-    <pre>{{ dateTable | json }}</pre>
-=======
-            FDM Timesheet  <button ng-click="refresh()">New Timesheet</button></h1> 
         </div>
    </div>
 <div id="userEntry" class="row col-xs-12 col-xs-offset-1">
@@ -74,21 +54,10 @@
     <li> Total hours worked : {{ ( timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] ) - ( timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] ) }}</li>
     <li> On site rate: {{ ((( timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] ) - ( timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] ))/7.5) * 16.80 | currency:"£" }} </li>
     <pre>{{ timesheetTable | json }}</pre>
->>>>>>> origin/john
 </div>
 <script>
 var app = angular.module('fdmTimesheet', []);
 app.controller('myCtrl', function($scope) {
-<<<<<<< HEAD
-    $scope.week = 0;
-    $scope.hours = 0;
-    $scope.break = 0;
-    $scope.date = 0;
-    
-    $scope.hourTable = { hourFields: [] };
-    $scope.breakTable = { breakFields: [] };
-    $scope.dateTable = { dateFields: [] };
-=======
     
     $scope.dayTable = [
          'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
@@ -99,26 +68,10 @@ app.controller('myCtrl', function($scope) {
                                 breakFields: [],
                                 dateFields: [] 
                             };
->>>>>>> origin/john
-
-  $scope.addFormHourField = function() {
-    $scope.hourTable.hourFields.push('');
-  }
-<<<<<<< HEAD
-   $scope.addFormBreakField = function() {
-    $scope.breakTable.breakFields.push('');
-  }
-   $scope.addFormDateField = function() {
-    $scope.dateTable.dateFields.push('');
-  }
-
-  $scope.submitTable = function() {
-    console.log($scope.table);
-=======
 
   $scope.refresh = function() {
     window.location.reload();
->>>>>>> origin/john
+
   }
 });
 </script>
