@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>FDM Timesheets</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
+  <script src="**/components/directives/fdmHeader/fdmHeader.html"></script>
+</head>
+<body ng-app="fdmTimesheet" ng-controller="myCtrl">
+    <div ng-view></div>
+    <div id="fdmHeaderContainer" class="row col-xs-12">
+        <div id="fdmHeaderBar">
+            <h1><img id="fdm-logo" src="client/assets/images/fdm-logo.jpg" height="42" width="84">
+            FDM Timesheet  <button ng-click="refresh()">New Timesheet</button></h1> 
+        </div>
+   </div>
+<div id="userEntry" class="row col-xs-12 col-xs-offset-1">
+   <table id="timesheetInputTable">
+    <h3>Week: <input ng-model="week"></h3>
+      <tr><th ng-repeat = "days in dayTable"> {{ days | uppercase }}</th></tr>
+        <tr class="Date">
+            <td><input ng-model="monDate" type="date"/></td>
+            <td><input ng-model="tueDate" type="date"/></td>
+            <td><input ng-model="wedDate" type="date"/></td>
+            <td><input ng-model="thuDate" type="date"/></td>
+            <td><input ng-model="friDate" type="date"/></td>
+        </tr>
+        <tr class="Hours">
+            <td><input ng-model="monHours" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="tueHours" type="number" placeholder="Hours Worked"></td>
+            <td><input ng-model="wedHours" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="thuHours" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="friHours" type="number" placeholder="Hours Worked"/></td>
+        </tr>
+        <tr class="Breaks">
+            <td><input ng-model="monBreaks" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="tueBreaks" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="wedBreaks" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="thuBreaks" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="friBreaks" type="number" placeholder="Break Time Taken"/></td>
+        </tr>
+    </table>
+</div>
+      
+<div id ="userDisplay" class="row col-xs-12 col-xs-offset-1">
+    <li>Week Number: {{week}}</li>
+    <li> Hours worked: {{ monHours + tueHours + wedHours + thuHours + friHours }} </li>
+    <li> Breaks taken: {{ monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks }} </li>
+    <li> Total hours worked : {{ ( monHours + tueHours + wedHours + thuHours + friHours ) - ( monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks ) }}</li>
+    <li> On site rate: {{ ((( monHours + tueHours + wedHours + thuHours + friHours ) - ( monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks ))/7.5) * 16.80 | currency:"£" }} </li>
+    <pre>{{ timesheetTable | json }}</pre>
+</div>
+<script>
+var app = angular.module('fdmTimesheet', []);
+app.controller('myCtrl', function($scope) {
+    
+    $scope.dayTable = [
+         'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
+    ]
+     
+    $scope.timesheetTable = {   hourFields: [],
+                                breakFields: [],
+                                dateFields: [] 
+                            };
+
+  $scope.addFormHourField = function() {
+    $scope.hourTable.hourFields.push('');
+  }
+
+  $scope.refresh = function() {
+    window.location.reload();
+  }
+});
+</script>
+</body>
+</html>
