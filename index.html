@@ -13,18 +13,59 @@
 </head>
 <body ng-app="fdmTimesheet" ng-controller="myCtrl">
     <div ng-view></div>
+    <div class="top" style="position:absolute; left:0; right:0; height: 92px; background-color:grey;">
     <div id="fdmHeaderContainer" class="row col-xs-12">
         <div id="fdmHeaderBar">
             <h1><img id="fdm-logo" src="client/assets/images/fdm-logo.jpg" height="42" width="84">
             FDM Timesheet</h1>
         </div>
    </div>
-<div id="userEntry" class="row col-xs-12 col-xs-offset-1">
+   </div>
+   
+   <div class="left" style=" width: 178px; height: 100vh; float:left; background-color:blue; padding-top: 2cm; margin-top: 92px">
+     
+     <button> This is a button </button>
+     
+   </div>
+   
+  <div class="main" style="position: absolute;
+    left:178px; top:92px; right:0; bottom:0; padding-top: 50px;">
+    <div id="userEntry">  
+<table class="table">
+    <thead>
+      
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="success">
+        <td>John</td>
+        <td><input/></td>
+        <td>john@example.com</td>
+      </tr>
+      <tr class="danger">
+        <td>Mary</td>
+        <td>Moe</td>
+        <td>mary@example.com</td>
+      </tr>
+      <tr class="info">
+        <td>July</td>
+        <td>Dooley</td>
+        <td>july@example.com</td>
+      </tr>
+    </tbody>
+  </table>
+    </div>
+
+<!--<div id="userEntry" class="row col-xs-12 col-xs-offset-1">
    <p>Week: <input ng-model="week"></p>
    <p>Date: <input ng-repeat="dateField in dateTable.dateFields track by $index" type='text' ng-model='dateTable.dateFields[$index]' placeholder='Date'><button ng-click="addFormDateField()">Add</button>
    <p>Hours: <input ng-repeat="hourField in hourTable.hourFields track by $index" type='text' ng-model='hourTable.hourFields[$index]' placeholder='Hours Worked'><button ng-click="addFormHourField()">Add</button>
    <p>Break: <input ng-repeat="breakField in breakTable.breakFields track by $index" type='text' ng-model='breakTable.breakFields[$index]' placeholder='Breaks Taken'><button ng-click="addFormBreakField()">Add</button>
-</div>
+</div>-->
       
 <div id ="userDisplay" class="row col-xs-12 col-xs-offset-1">
     <p>Week Number: {{week}}</p>
@@ -34,6 +75,8 @@
     <pre>{{ hourTable | json }}</pre>
     <pre>{{ breakTable | json }}</pre>
     <pre>{{ dateTable | json }}</pre>
+</div>
+
 </div>
 <script>
 var app = angular.module('fdmTimesheet', []);
