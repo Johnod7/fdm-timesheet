@@ -48,7 +48,7 @@
 </div>
       
 <div id ="userDisplay" class="row col-xs-12 col-xs-offset-1">
-    <li>Week Number: {{week}}</li>
+    <li>Week Number: {{timesheetTable.week}}</li>
     <li> Hours worked: {{ timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] }} </li>
     <li> Breaks taken: {{ timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] }} </li>
     <li> Total hours worked : {{ ( timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] ) - ( timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] ) }}</li>
@@ -63,7 +63,7 @@ app.controller('myCtrl', function($scope) {
          'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     ]
     
-    $scope.timesheetTable = {   week: [],
+    $scope.timesheetTable = {   week: "",
                                 hourFields: [],
                                 breakFields: [],
                                 dateFields: [] 
