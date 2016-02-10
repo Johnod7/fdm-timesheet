@@ -1,0 +1,46 @@
+#fdmHeaderContainer {
+    background-color: black;
+    color: white;
+    width: 100vw;
+}
+
+#userEntry {
+    background-color: gray;
+    color: white;
+    
+}
+
+#sidebar {
+    float: left;
+    background-color: silver;
+    height: 100vh;
+}
+
+#userDisplay {
+    background-color: gray;
+    color: white;
+    font-size: 1.5em;
+    font-style: strong;
+    float: right;
+    height: 100vh;
+}
+
+.dateField {
+    color: black;
+}
+
+.breakField {
+    color: black;
+}
+
+.hourField {
+    color: black;
+}
+
+.weekInput {
+    color: black;
+}
+
+.btn {
+    float: right;
+}

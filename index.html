@@ -10,49 +10,52 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min.js"></script>
   <script src="**/components/directives/fdmHeader/fdmHeader.html"></script>
+  <link rel="stylesheet" type="text/css" href="index.css">
 </head>
 <body ng-app="fdmTimesheet" ng-controller="myCtrl">
     <div ng-view></div>
-    <div id="fdmHeaderContainer" class="row col-xs-12">
+    <div id="fdmHeaderContainer" class="row col-xs-12 no-padding">
         <div id="fdmHeaderBar">
-            <h1><img id="fdm-logo" src="client/assets/images/fdm-logo.jpg" height="42" width="84">
-            FDM Timesheet  <button ng-click="refresh()">New Timesheet</button></h1> 
+            <h1><img id="fdm-logo" src="client/assets/images/5518_gp_logo_f0806.png" height="60" width="84">
+            FDM Timesheet <button ng-click="refresh()" class="btn btn-secondary"> New Timesheet</button></h1>
         </div>
    </div>
-<div id="userEntry" class="row col-xs-12 col-xs-offset-1">
-   <table id="timesheetInputTable">
-    <h3>Week: <input ng-model="week"></h3>
+   <div id="sidebar" class="col-xs-1">
+   </div>
+<div id="userEntry" class="col-xs-11">
+   <table id="timesheetInputTable" class="table table-responsive">
+    <h3>Week: <input ng-model="timesheetTable.week" class="weekInput"></h3>
       <tr><th ng-repeat = "days in dayTable"> {{ days | uppercase }}</th></tr>
-        <tr class="Date">
-            <td><input ng-model="monDate" type="date"/></td>
-            <td><input ng-model="tueDate" type="date"/></td>
-            <td><input ng-model="wedDate" type="date"/></td>
-            <td><input ng-model="thuDate" type="date"/></td>
-            <td><input ng-model="friDate" type="date"/></td>
+        <tr class="dateField">
+            <td><input ng-model="timesheetTable.dateFields[0]" type="date"/></td>
+            <td><input ng-model="timesheetTable.dateFields[1]" type="date"/></td>
+            <td><input ng-model="timesheetTable.dateFields[2]" type="date"/></td>
+            <td><input ng-model="timesheetTable.dateFields[3]" type="date"/></td>
+            <td><input ng-model="timesheetTable.dateFields[4]" type="date"/></td>
         </tr>
-        <tr class="Hours">
-            <td><input ng-model="monHours" type="number" placeholder="Hours Worked"/></td>
-            <td><input ng-model="tueHours" type="number" placeholder="Hours Worked"></td>
-            <td><input ng-model="wedHours" type="number" placeholder="Hours Worked"/></td>
-            <td><input ng-model="thuHours" type="number" placeholder="Hours Worked"/></td>
-            <td><input ng-model="friHours" type="number" placeholder="Hours Worked"/></td>
+        <tr class="hourField">
+            <td><input ng-model="timesheetTable.hourFields[0]" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="timesheetTable.hourFields[1]" type="number" placeholder="Hours Worked"></td>
+            <td><input ng-model="timesheetTable.hourFields[2]" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="timesheetTable.hourFields[3]" type="number" placeholder="Hours Worked"/></td>
+            <td><input ng-model="timesheetTable.hourFields[4]" type="number" placeholder="Hours Worked"/></td>
         </tr>
-        <tr class="Breaks">
-            <td><input ng-model="monBreaks" type="number" placeholder="Break Time Taken"/></td>
-            <td><input ng-model="tueBreaks" type="number" placeholder="Break Time Taken"/></td>
-            <td><input ng-model="wedBreaks" type="number" placeholder="Break Time Taken"/></td>
-            <td><input ng-model="thuBreaks" type="number" placeholder="Break Time Taken"/></td>
-            <td><input ng-model="friBreaks" type="number" placeholder="Break Time Taken"/></td>
+        <tr class="breakField">
+            <td><input ng-model="timesheetTable.breakFields[0]" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="timesheetTable.breakFields[1]" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="timesheetTable.breakFields[2]" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="timesheetTable.breakFields[3]" type="number" placeholder="Break Time Taken"/></td>
+            <td><input ng-model="timesheetTable.breakFields[4]" type="number" placeholder="Break Time Taken"/></td>
         </tr>
     </table>
 </div>
       
-<div id ="userDisplay" class="row col-xs-12 col-xs-offset-1">
-    <li>Week Number: {{week}}</li>
-    <li> Hours worked: {{ monHours + tueHours + wedHours + thuHours + friHours }} </li>
-    <li> Breaks taken: {{ monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks }} </li>
-    <li> Total hours worked : {{ ( monHours + tueHours + wedHours + thuHours + friHours ) - ( monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks ) }}</li>
-    <li> On site rate: {{ ((( monHours + tueHours + wedHours + thuHours + friHours ) - ( monBreaks + tueBreaks + wedBreaks + thuBreaks + friBreaks ))/7.5) * 16.80 | currency:"£" }} </li>
+<div id ="userDisplay" class="col-xs-11">
+    <li>Week Number: {{timesheetTable.week}}</li>
+    <li> Hours worked: {{ timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] }} </li>
+    <li> Breaks taken: {{ timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] }} </li>
+    <li> Total hours worked : <mark>{{ ( timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] ) - ( timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] ) }}</mark></li>
+    <li> On site rate: {{ ((( timesheetTable.hourFields[0] + timesheetTable.hourFields[1] + timesheetTable.hourFields[2] + timesheetTable.hourFields[3] + timesheetTable.hourFields[4] ) - ( timesheetTable.breakFields[0] + timesheetTable.breakFields[1] + timesheetTable.breakFields[2] + timesheetTable.breakFields[3] + timesheetTable.breakFields[4] ))/7.5) * 16.80 | currency:"£" }} </li>
     <pre>{{ timesheetTable | json }}</pre>
 </div>
 <script>
@@ -62,18 +65,16 @@ app.controller('myCtrl', function($scope) {
     $scope.dayTable = [
          'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'
     ]
-     
-    $scope.timesheetTable = {   hourFields: [],
+    
+    $scope.timesheetTable = {   week: "",
+                                hourFields: [],
                                 breakFields: [],
                                 dateFields: [] 
                             };
 
-  $scope.addFormHourField = function() {
-    $scope.hourTable.hourFields.push('');
-  }
-
   $scope.refresh = function() {
     window.location.reload();
+
   }
 });
 </script>
